@@ -58,6 +58,42 @@
     <Compile Include="FormulariosAE\frmFormasFarmaceuticasAE.Designer.cs">
       <DependentUpon>frmFormasFarmaceuticasAE.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormulariosAE\frmLaboratoriosAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormulariosAE\frmLaboratoriosAE.Designer.cs">
+      <DependentUpon>frmLaboratoriosAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormulariosAE\frmLocalidadesAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormulariosAE\frmLocalidadesAE.Designer.cs">
+      <DependentUpon>frmLocalidadesAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormulariosAE\frmObrasSocialesAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormulariosAE\frmObrasSocialesAE.Designer.cs">
+      <DependentUpon>frmObrasSocialesAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormulariosAE\frmProvinciasAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormulariosAE\frmProvinciasAE.Designer.cs">
+      <DependentUpon>frmProvinciasAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormulariosAE\frmTiposDeDocumentosAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormulariosAE\frmTiposDeDocumentosAE.Designer.cs">
+      <DependentUpon>frmTiposDeDocumentosAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormulariosAE\frmTiposDeIngredientesAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormulariosAE\frmTiposDeIngredientesAE.Designer.cs">
+      <DependentUpon>frmTiposDeIngredientesAE.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormulariosAE\frmTiposDeMedicamentosAE.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,12 +112,49 @@
     <Compile Include="Formularios\frmFormasFarmaceuticas.Designer.cs">
       <DependentUpon>frmFormasFarmaceuticas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\frmLaboratorios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmLaboratorios.Designer.cs">
+      <DependentUpon>frmLaboratorios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmLocalidades.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmLocalidades.Designer.cs">
+      <DependentUpon>frmLocalidades.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmObrasSociales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmObrasSociales.Designer.cs">
+      <DependentUpon>frmObrasSociales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmProvincias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmProvincias.Designer.cs">
+      <DependentUpon>frmProvincias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmTiposDeDocumentos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmTiposDeDocumentos.Designer.cs">
+      <DependentUpon>frmTiposDeDocumentos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmTiposDeIngredientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmTiposDeIngredientes.Designer.cs">
+      <DependentUpon>frmTiposDeIngredientes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\frmTiposDeMedicamentos.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formularios\frmTiposDeMedicamentos.Designer.cs">
       <DependentUpon>frmTiposDeMedicamentos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Helper.cs" />
     <Compile Include="MenuPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +169,24 @@
     <EmbeddedResource Include="FormulariosAE\frmFormasFarmaceuticasAE.resx">
       <DependentUpon>frmFormasFarmaceuticasAE.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormulariosAE\frmLaboratoriosAE.resx">
+      <DependentUpon>frmLaboratoriosAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormulariosAE\frmLocalidadesAE.resx">
+      <DependentUpon>frmLocalidadesAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormulariosAE\frmObrasSocialesAE.resx">
+      <DependentUpon>frmObrasSocialesAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormulariosAE\frmProvinciasAE.resx">
+      <DependentUpon>frmProvinciasAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormulariosAE\frmTiposDeDocumentosAE.resx">
+      <DependentUpon>frmTiposDeDocumentosAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormulariosAE\frmTiposDeIngredientesAE.resx">
+      <DependentUpon>frmTiposDeIngredientesAE.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormulariosAE\frmTiposDeMedicamentosAE.resx">
       <DependentUpon>frmTiposDeMedicamentosAE.cs</DependentUpon>
     </EmbeddedResource>
@@ -104,6 +195,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmFormasFarmaceuticas.resx">
       <DependentUpon>frmFormasFarmaceuticas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmLaboratorios.resx">
+      <DependentUpon>frmLaboratorios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmLocalidades.resx">
+      <DependentUpon>frmLocalidades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmObrasSociales.resx">
+      <DependentUpon>frmObrasSociales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmProvincias.resx">
+      <DependentUpon>frmProvincias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmTiposDeDocumentos.resx">
+      <DependentUpon>frmTiposDeDocumentos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmTiposDeIngredientes.resx">
+      <DependentUpon>frmTiposDeIngredientes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmTiposDeMedicamentos.resx">
       <DependentUpon>frmTiposDeMedicamentos.cs</DependentUpon>

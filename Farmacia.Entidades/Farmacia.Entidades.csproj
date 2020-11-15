@@ -41,8 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Droga.cs" />
+    <Compile Include="Entidades\Droga.cs" />
     <Compile Include="Entidades\FormaFarmaceutica.cs" />
+    <Compile Include="Entidades\Laboratorio.cs" />
+    <Compile Include="Entidades\Localidad.cs" />
+    <Compile Include="Entidades\ObraSocial.cs" />
+    <Compile Include="Entidades\Provincia.cs" />
+    <Compile Include="Entidades\TipoDeDocumento.cs" />
+    <Compile Include="Entidades\TipoDeIngrediente.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entidades\TipoDeMedicamento.cs" />
   </ItemGroup>

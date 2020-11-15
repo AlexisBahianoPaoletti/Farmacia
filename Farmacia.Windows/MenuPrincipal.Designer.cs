@@ -32,8 +32,14 @@
             this.archivosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.drogasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tiposDeMedicamentosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.formasFarmaceuticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.laboratoriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tiposDeDocumentosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.provinciasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tiposDeIngredientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.obrasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.localidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,7 +59,13 @@
             this.archivosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.drogasToolStripMenuItem,
             this.tiposDeMedicamentosToolStripMenuItem,
-            this.formasFarmaceuticasToolStripMenuItem});
+            this.formasFarmaceuticasToolStripMenuItem,
+            this.laboratoriosToolStripMenuItem,
+            this.tiposDeDocumentosToolStripMenuItem,
+            this.provinciasToolStripMenuItem,
+            this.tiposDeIngredientesToolStripMenuItem,
+            this.obrasToolStripMenuItem,
+            this.localidadesToolStripMenuItem});
             this.archivosToolStripMenuItem.Name = "archivosToolStripMenuItem";
             this.archivosToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.archivosToolStripMenuItem.Text = "Archivos";
@@ -72,19 +84,61 @@
             this.tiposDeMedicamentosToolStripMenuItem.Text = "Tipos de medicamentos";
             this.tiposDeMedicamentosToolStripMenuItem.Click += new System.EventHandler(this.tiposDeMedicamentosToolStripMenuItem_Click);
             // 
-            // salirToolStripMenuItem
-            // 
-            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
-            this.salirToolStripMenuItem.Text = "Salir";
-            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
-            // 
             // formasFarmaceuticasToolStripMenuItem
             // 
             this.formasFarmaceuticasToolStripMenuItem.Name = "formasFarmaceuticasToolStripMenuItem";
             this.formasFarmaceuticasToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.formasFarmaceuticasToolStripMenuItem.Text = "Formas farmaceuticas";
             this.formasFarmaceuticasToolStripMenuItem.Click += new System.EventHandler(this.formasFarmaceuticasToolStripMenuItem_Click);
+            // 
+            // laboratoriosToolStripMenuItem
+            // 
+            this.laboratoriosToolStripMenuItem.Name = "laboratoriosToolStripMenuItem";
+            this.laboratoriosToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.laboratoriosToolStripMenuItem.Text = "Laboratorios";
+            this.laboratoriosToolStripMenuItem.Click += new System.EventHandler(this.laboratoriosToolStripMenuItem_Click);
+            // 
+            // tiposDeDocumentosToolStripMenuItem
+            // 
+            this.tiposDeDocumentosToolStripMenuItem.Name = "tiposDeDocumentosToolStripMenuItem";
+            this.tiposDeDocumentosToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.tiposDeDocumentosToolStripMenuItem.Text = "Tipos de documentos";
+            this.tiposDeDocumentosToolStripMenuItem.Click += new System.EventHandler(this.tiposDeDocumentosToolStripMenuItem_Click);
+            // 
+            // provinciasToolStripMenuItem
+            // 
+            this.provinciasToolStripMenuItem.Name = "provinciasToolStripMenuItem";
+            this.provinciasToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.provinciasToolStripMenuItem.Text = "Provincias";
+            this.provinciasToolStripMenuItem.Click += new System.EventHandler(this.provinciasToolStripMenuItem_Click);
+            // 
+            // tiposDeIngredientesToolStripMenuItem
+            // 
+            this.tiposDeIngredientesToolStripMenuItem.Name = "tiposDeIngredientesToolStripMenuItem";
+            this.tiposDeIngredientesToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.tiposDeIngredientesToolStripMenuItem.Text = "Tipos de ingredientes";
+            this.tiposDeIngredientesToolStripMenuItem.Click += new System.EventHandler(this.tiposDeIngredientesToolStripMenuItem_Click);
+            // 
+            // obrasToolStripMenuItem
+            // 
+            this.obrasToolStripMenuItem.Name = "obrasToolStripMenuItem";
+            this.obrasToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.obrasToolStripMenuItem.Text = "Obras sociales";
+            this.obrasToolStripMenuItem.Click += new System.EventHandler(this.obrasToolStripMenuItem_Click);
+            // 
+            // localidadesToolStripMenuItem
+            // 
+            this.localidadesToolStripMenuItem.Name = "localidadesToolStripMenuItem";
+            this.localidadesToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.localidadesToolStripMenuItem.Text = "Localidades";
+            this.localidadesToolStripMenuItem.Click += new System.EventHandler(this.localidadesToolStripMenuItem_Click);
+            // 
+            // salirToolStripMenuItem
+            // 
+            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+            this.salirToolStripMenuItem.Text = "Salir";
+            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
             // MenuPrincipal
             // 
@@ -113,6 +167,12 @@
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tiposDeMedicamentosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem formasFarmaceuticasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem laboratoriosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tiposDeDocumentosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem provinciasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tiposDeIngredientesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem obrasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem localidadesToolStripMenuItem;
     }
 }
 

@@ -128,7 +128,7 @@
             this.Controls.Add(this.dgvDatos);
             this.Controls.Add(this.toolStrip1);
             this.Name = "frmFormaFarmaceuticas";
-            this.Text = "frmFormasFarmaceuticas";
+            this.Text = "Formas farmaceuticas";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmFormaFarmaceuticas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();

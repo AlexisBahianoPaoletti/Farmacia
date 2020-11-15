@@ -1,5 +1,5 @@
-﻿using Farmacia.Entidades;
-using Farmacia.Servicio;
+﻿using Farmacia.Entidades.Entidades;
+using Farmacia.Servicio.Servicios;
 using Farmacia.Windows.FormulariosAE;
 using System;
 using System.Collections.Generic;
@@ -13,53 +13,53 @@ using System.Windows.Forms;
 
 namespace Farmacia.Windows.Formularios
 {
-    public partial class frmDrogas : Form
+    public partial class frmTiposDeDocumentos : Form
     {
-        public frmDrogas()
+        public frmTiposDeDocumentos()
         {
             InitializeComponent();
         }
 
 
-        private List<Droga> lista;
-        private ServicioDroga _servicio;
+        private List<TipoDeDocumento> lista;
+        private ServicioTipoDeDocumento _servicio;
 
         private void MostrarEnGrilla()
         {
             dgvDatos.Rows.Clear();
-            foreach (var droga in lista)
+            foreach (var tipoDeDocumento in lista)
             {
                 DataGridViewRow r = ConstruirFila();
-                SetearFila(r, droga);
+                SetearFila(r, tipoDeDocumento);
                 AñadirFila(r);
             }
         }
 
-    
+
 
         private void AñadirFila(DataGridViewRow r)
         {
             dgvDatos.Rows.Add(r);
         }
 
-        private void SetearFila(DataGridViewRow r, Droga droga)
+        private void SetearFila(DataGridViewRow r, TipoDeDocumento tipoDeDocumento)
         {
-            r.Cells[clmDroga.Index].Value = droga.NombreDroga;
+            r.Cells[clmTipoDeDocumento.Index].Value = tipoDeDocumento.Descripcion;
 
-            r.Tag = droga;
+            r.Tag = tipoDeDocumento;
         }
 
         private DataGridViewRow ConstruirFila()
         {
             DataGridViewRow r = new DataGridViewRow();
-            r.CreateCells(dgvDatos); 
+            r.CreateCells(dgvDatos);
             return r;
         }
 
-        public void AgregarFila(Droga droga)
+        public void AgregarFila(TipoDeDocumento tipoDeDocumento)
         {
             DataGridViewRow r = ConstruirFila();
-            SetearFila(r, droga);
+            SetearFila(r, tipoDeDocumento);
             AñadirFila(r);
 
         }
@@ -68,11 +68,11 @@ namespace Farmacia.Windows.Formularios
             Close();
         }
 
-        private void FrmDrogas_Load(object sender, System.EventArgs e)
+        private void FrmTipoDeDocumentos_Load(object sender, System.EventArgs e)
         {
             try
             {
-                _servicio = new ServicioDroga();
+                _servicio = new ServicioTipoDeDocumento();
                 lista = _servicio.GetLista();
                 MostrarEnGrilla();
             }
@@ -85,25 +85,25 @@ namespace Farmacia.Windows.Formularios
 
         private void tslAgregar_Click(object sender, EventArgs e)
         {
-            frmDrogasAE frm = new frmDrogasAE(this);
-            frm.Text = "Nueva Droga";
+            frmTiposDeDocumentosAE frm = new frmTiposDeDocumentosAE(this);
+            frm.Text = "Nuevo tipo de documento";
             DialogResult dr = frm.ShowDialog(this);
             if (dr == DialogResult.OK)
             {
                 try
                 {
-                    Droga droga = frm.GetDroga();
-                    if (!_servicio.Existe(droga))
+                    TipoDeDocumento tipoDeDocumento = frm.GetTipoDeDocumento();
+                    if (!_servicio.Existe(tipoDeDocumento))
                     {
-                        _servicio.Guardar(droga);
+                        _servicio.Guardar(tipoDeDocumento);
                         DataGridViewRow r = ConstruirFila();
-                        SetearFila(r, droga);
+                        SetearFila(r, tipoDeDocumento);
                         AñadirFila(r);
                         MessageBox.Show("Registro Agregado");
                     }
                     else
                     {
-                        MessageBox.Show("Droga repetida");
+                        MessageBox.Show("Tipo de documento repetido");
                     }
                 }
                 catch (Exception exception)
@@ -119,9 +119,9 @@ namespace Farmacia.Windows.Formularios
             if (dgvDatos.SelectedRows.Count > 0)
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
-                Droga droga = (Droga)r.Tag;
+                TipoDeDocumento tipoDeDocumento = (TipoDeDocumento)r.Tag;
 
-                DialogResult dr = MessageBox.Show(this, $"¿Desea dar de baja la droga {droga.NombreDroga}?",
+                DialogResult dr = MessageBox.Show(this, $"¿Desea dar de baja el tipo de documento {tipoDeDocumento.Descripcion}?",
                     "Confirmar Baja",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
@@ -129,7 +129,7 @@ namespace Farmacia.Windows.Formularios
                 {
                     try
                     {
-                        _servicio.Borrar(droga.DrogaId);
+                        _servicio.Borrar(tipoDeDocumento.TipoDeDocumentoId);
                         dgvDatos.Rows.Remove(r);
                         MessageBox.Show("Registro borrado");
                     }
@@ -148,25 +148,25 @@ namespace Farmacia.Windows.Formularios
             if (dgvDatos.SelectedRows.Count > 0)
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
-                Droga droga = (Droga)r.Tag;
-                frmDrogasAE frm = new frmDrogasAE();
-                frm.Text = "Editar Droga";
-                frm.SetDroga(droga);
+                TipoDeDocumento tipoDeDocumento = (TipoDeDocumento)r.Tag;
+                frmTiposDeDocumentosAE frm = new frmTiposDeDocumentosAE();
+                frm.Text = "Editar TipoDeDocumento";
+                frm.SetTipoDeDocumento(tipoDeDocumento);
                 DialogResult dr = frm.ShowDialog(this);
                 if (dr == DialogResult.OK)
                 {
                     try
                     {
-                        droga = frm.GetDroga();
-                        if (!_servicio.Existe(droga))
+                        tipoDeDocumento = frm.GetTipoDeDocumento();
+                        if (!_servicio.Existe(tipoDeDocumento))
                         {
-                            _servicio.Guardar(droga);
-                            SetearFila(r, droga);
+                            _servicio.Guardar(tipoDeDocumento);
+                            SetearFila(r, tipoDeDocumento);
                             MessageBox.Show("Registro Editado");
                         }
                         else
                         {
-                            MessageBox.Show("Droga Repetida");
+                            MessageBox.Show("TipoDeDocumento Repetida");
                         }
                     }
                     catch (Exception exception)

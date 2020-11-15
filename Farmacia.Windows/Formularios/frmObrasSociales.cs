@@ -1,5 +1,5 @@
-﻿using Farmacia.Entidades;
-using Farmacia.Servicio;
+﻿using Farmacia.Entidades.Entidades;
+using Farmacia.Servicio.Servicios;
 using Farmacia.Windows.FormulariosAE;
 using System;
 using System.Collections.Generic;
@@ -13,53 +13,54 @@ using System.Windows.Forms;
 
 namespace Farmacia.Windows.Formularios
 {
-    public partial class frmDrogas : Form
+    public partial class frmObrasSociales : Form
     {
-        public frmDrogas()
+        public frmObrasSociales()
         {
             InitializeComponent();
         }
 
 
-        private List<Droga> lista;
-        private ServicioDroga _servicio;
+        private List<ObraSocial> lista;
+        private ServicioObraSocial _servicio;
 
         private void MostrarEnGrilla()
         {
             dgvDatos.Rows.Clear();
-            foreach (var droga in lista)
+            foreach (var obraSocial in lista)
             {
                 DataGridViewRow r = ConstruirFila();
-                SetearFila(r, droga);
+                SetearFila(r, obraSocial);
                 AñadirFila(r);
             }
         }
 
-    
+
 
         private void AñadirFila(DataGridViewRow r)
         {
             dgvDatos.Rows.Add(r);
         }
 
-        private void SetearFila(DataGridViewRow r, Droga droga)
+        private void SetearFila(DataGridViewRow r, ObraSocial obraSocial)
         {
-            r.Cells[clmDroga.Index].Value = droga.NombreDroga;
+            r.Cells[clmObraSocial.Index].Value = obraSocial.NombreObraSocial;
+            r.Cells[clmPorcentajeDeDescuento.Index].Value = obraSocial.PorcentajeDeDescuento;
 
-            r.Tag = droga;
+            r.Tag = obraSocial;
         }
 
         private DataGridViewRow ConstruirFila()
         {
             DataGridViewRow r = new DataGridViewRow();
-            r.CreateCells(dgvDatos); 
+            r.CreateCells(dgvDatos);
             return r;
         }
 
-        public void AgregarFila(Droga droga)
+        public void AgregarFila(ObraSocial obraSocial)
         {
             DataGridViewRow r = ConstruirFila();
-            SetearFila(r, droga);
+            SetearFila(r, obraSocial);
             AñadirFila(r);
 
         }
@@ -68,11 +69,11 @@ namespace Farmacia.Windows.Formularios
             Close();
         }
 
-        private void FrmDrogas_Load(object sender, System.EventArgs e)
+        private void FrmObrasSociales_Load(object sender, System.EventArgs e)
         {
             try
             {
-                _servicio = new ServicioDroga();
+                _servicio = new ServicioObraSocial();
                 lista = _servicio.GetLista();
                 MostrarEnGrilla();
             }
@@ -85,25 +86,25 @@ namespace Farmacia.Windows.Formularios
 
         private void tslAgregar_Click(object sender, EventArgs e)
         {
-            frmDrogasAE frm = new frmDrogasAE(this);
-            frm.Text = "Nueva Droga";
+            frmObrasSocialesAE frm = new frmObrasSocialesAE(this);
+            frm.Text = "Nueva Obra social";
             DialogResult dr = frm.ShowDialog(this);
             if (dr == DialogResult.OK)
             {
                 try
                 {
-                    Droga droga = frm.GetDroga();
-                    if (!_servicio.Existe(droga))
+                    ObraSocial obraSocial = frm.GetObraSocial();
+                    if (!_servicio.Existe(obraSocial))
                     {
-                        _servicio.Guardar(droga);
+                        _servicio.Guardar(obraSocial);
                         DataGridViewRow r = ConstruirFila();
-                        SetearFila(r, droga);
+                        SetearFila(r, obraSocial);
                         AñadirFila(r);
                         MessageBox.Show("Registro Agregado");
                     }
                     else
                     {
-                        MessageBox.Show("Droga repetida");
+                        MessageBox.Show("Obra social repetida");
                     }
                 }
                 catch (Exception exception)
@@ -119,9 +120,9 @@ namespace Farmacia.Windows.Formularios
             if (dgvDatos.SelectedRows.Count > 0)
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
-                Droga droga = (Droga)r.Tag;
+                ObraSocial obraSocial = (ObraSocial)r.Tag;
 
-                DialogResult dr = MessageBox.Show(this, $"¿Desea dar de baja la droga {droga.NombreDroga}?",
+                DialogResult dr = MessageBox.Show(this, $"¿Desea dar de baja la obra social {obraSocial.NombreObraSocial}?",
                     "Confirmar Baja",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
@@ -129,7 +130,7 @@ namespace Farmacia.Windows.Formularios
                 {
                     try
                     {
-                        _servicio.Borrar(droga.DrogaId);
+                        _servicio.Borrar(obraSocial.ObraSocialId);
                         dgvDatos.Rows.Remove(r);
                         MessageBox.Show("Registro borrado");
                     }
@@ -148,25 +149,25 @@ namespace Farmacia.Windows.Formularios
             if (dgvDatos.SelectedRows.Count > 0)
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
-                Droga droga = (Droga)r.Tag;
-                frmDrogasAE frm = new frmDrogasAE();
-                frm.Text = "Editar Droga";
-                frm.SetDroga(droga);
+                ObraSocial obraSocial = (ObraSocial)r.Tag;
+                frmObrasSocialesAE frm = new frmObrasSocialesAE();
+                frm.Text = "Editar Obra social";
+                frm.SetObraSocial(obraSocial);
                 DialogResult dr = frm.ShowDialog(this);
                 if (dr == DialogResult.OK)
                 {
                     try
                     {
-                        droga = frm.GetDroga();
-                        if (!_servicio.Existe(droga))
+                        obraSocial = frm.GetObraSocial();
+                        if (!_servicio.Existe(obraSocial))
                         {
-                            _servicio.Guardar(droga);
-                            SetearFila(r, droga);
+                            _servicio.Guardar(obraSocial);
+                            SetearFila(r, obraSocial);
                             MessageBox.Show("Registro Editado");
                         }
                         else
                         {
-                            MessageBox.Show("Droga Repetida");
+                            MessageBox.Show("Obra social Repetida");
                         }
                     }
                     catch (Exception exception)

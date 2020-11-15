@@ -41,5 +41,41 @@ namespace Farmacia.Windows
             frmFormaFarmaceuticas frm = new frmFormaFarmaceuticas();
             frm.ShowDialog(this);
         }
+
+        private void laboratoriosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLaboratorios frm = new frmLaboratorios();
+            frm.ShowDialog(this);
+        }
+
+        private void tiposDeDocumentosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmTiposDeDocumentos frm = new frmTiposDeDocumentos();
+            frm.ShowDialog(this);
+        }
+
+        private void provinciasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmProvincias frm = new frmProvincias();
+            frm.ShowDialog(this);
+        }
+
+        private void tiposDeIngredientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmTiposDeIngredientes frm = new frmTiposDeIngredientes();
+            frm.ShowDialog(this);
+        }
+
+        private void obrasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmObrasSociales frm = new frmObrasSociales();
+            frm.ShowDialog(this);
+        }
+
+        private void localidadesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLocalidades frm = new frmLocalidades();
+            frm.ShowDialog(this);
+        }
     }
 }

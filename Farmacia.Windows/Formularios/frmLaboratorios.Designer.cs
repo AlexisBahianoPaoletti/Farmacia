@@ -1,6 +1,6 @@
 ﻿namespace Farmacia.Windows.Formularios
 {
-    partial class frmTiposDeMedicamentos
+    partial class frmLaboratorios
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.dgvDatos = new System.Windows.Forms.DataGridView();
-            this.clmTipoDeMedicamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tslAgregar = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -37,6 +36,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tslEditar = new System.Windows.Forms.ToolStripLabel();
             this.tslCerrar = new System.Windows.Forms.ToolStripLabel();
+            this.clmLaboratorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -47,7 +47,7 @@
             this.dgvDatos.AllowUserToDeleteRows = false;
             this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDatos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmTipoDeMedicamento});
+            this.clmLaboratorio});
             this.dgvDatos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDatos.Location = new System.Drawing.Point(0, 25);
             this.dgvDatos.MultiSelect = false;
@@ -57,13 +57,6 @@
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDatos.Size = new System.Drawing.Size(800, 425);
             this.dgvDatos.TabIndex = 3;
-            // 
-            // clmTipoDeMedicamento
-            // 
-            this.clmTipoDeMedicamento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clmTipoDeMedicamento.HeaderText = "Tipo de medicamento";
-            this.clmTipoDeMedicamento.Name = "clmTipoDeMedicamento";
-            this.clmTipoDeMedicamento.ReadOnly = true;
             // 
             // toolStrip1
             // 
@@ -119,7 +112,14 @@
             this.tslCerrar.Text = "Cerrar";
             this.tslCerrar.Click += new System.EventHandler(this.tslCerrar_Click);
             // 
-            // frmTiposDeMedicamentos
+            // clmLaboratorio
+            // 
+            this.clmLaboratorio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clmLaboratorio.HeaderText = "Laboratorio";
+            this.clmLaboratorio.Name = "clmLaboratorio";
+            this.clmLaboratorio.ReadOnly = true;
+            // 
+            // frmLaboratorios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -127,10 +127,10 @@
             this.ControlBox = false;
             this.Controls.Add(this.dgvDatos);
             this.Controls.Add(this.toolStrip1);
-            this.Name = "frmTiposDeMedicamentos";
-            this.Text = "Tipos de medicamentos";
+            this.Name = "frmLaboratorios";
+            this.Text = "Laboratorios";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.FrmTiposDeMedicamentos_Load);
+            this.Load += new System.EventHandler(this.FrmLaboratorios_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -149,6 +149,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel tslEditar;
         private System.Windows.Forms.ToolStripLabel tslCerrar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmTipoDeMedicamento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmLaboratorio;
     }
 }

@@ -1,5 +1,5 @@
-﻿using Farmacia.Entidades;
-using Farmacia.Servicio;
+﻿using Farmacia.Entidades.Entidades;
+using Farmacia.Servicio.Servicios;
 using Farmacia.Windows.FormulariosAE;
 using System;
 using System.Collections.Generic;
@@ -13,53 +13,54 @@ using System.Windows.Forms;
 
 namespace Farmacia.Windows.Formularios
 {
-    public partial class frmDrogas : Form
+    public partial class frmLocalidades : Form
     {
-        public frmDrogas()
+        public frmLocalidades()
         {
             InitializeComponent();
         }
 
 
-        private List<Droga> lista;
-        private ServicioDroga _servicio;
+        private List<Localidad> lista;
+        private ServicioLocalidad _servicio;
 
         private void MostrarEnGrilla()
         {
             dgvDatos.Rows.Clear();
-            foreach (var droga in lista)
+            foreach (var localidad in lista)
             {
                 DataGridViewRow r = ConstruirFila();
-                SetearFila(r, droga);
+                SetearFila(r, localidad);
                 AñadirFila(r);
             }
         }
 
-    
+
 
         private void AñadirFila(DataGridViewRow r)
         {
             dgvDatos.Rows.Add(r);
         }
 
-        private void SetearFila(DataGridViewRow r, Droga droga)
+        private void SetearFila(DataGridViewRow r, Localidad localidad)
         {
-            r.Cells[clmDroga.Index].Value = droga.NombreDroga;
+            r.Cells[clmLocalidad.Index].Value = localidad.NombreLocalidad;
+            r.Cells[clmProvincia.Index].Value = localidad.Provincia.NombreProvincia;
 
-            r.Tag = droga;
+            r.Tag = localidad;
         }
 
         private DataGridViewRow ConstruirFila()
         {
             DataGridViewRow r = new DataGridViewRow();
-            r.CreateCells(dgvDatos); 
+            r.CreateCells(dgvDatos);
             return r;
         }
 
-        public void AgregarFila(Droga droga)
+        public void AgregarFila(Localidad localidad)
         {
             DataGridViewRow r = ConstruirFila();
-            SetearFila(r, droga);
+            SetearFila(r, localidad);
             AñadirFila(r);
 
         }
@@ -68,11 +69,11 @@ namespace Farmacia.Windows.Formularios
             Close();
         }
 
-        private void FrmDrogas_Load(object sender, System.EventArgs e)
+        private void FrmLocalidades_Load(object sender, System.EventArgs e)
         {
             try
             {
-                _servicio = new ServicioDroga();
+                _servicio = new ServicioLocalidad();
                 lista = _servicio.GetLista();
                 MostrarEnGrilla();
             }
@@ -85,25 +86,25 @@ namespace Farmacia.Windows.Formularios
 
         private void tslAgregar_Click(object sender, EventArgs e)
         {
-            frmDrogasAE frm = new frmDrogasAE(this);
-            frm.Text = "Nueva Droga";
+            frmLocalidadesAE frm = new frmLocalidadesAE(this);
+            frm.Text = "Nueva Localidad";
             DialogResult dr = frm.ShowDialog(this);
             if (dr == DialogResult.OK)
             {
                 try
                 {
-                    Droga droga = frm.GetDroga();
-                    if (!_servicio.Existe(droga))
+                    Localidad localidad = frm.GetLocalidad();
+                    if (!_servicio.Existe(localidad))
                     {
-                        _servicio.Guardar(droga);
+                        _servicio.Guardar(localidad);
                         DataGridViewRow r = ConstruirFila();
-                        SetearFila(r, droga);
+                        SetearFila(r, localidad);
                         AñadirFila(r);
                         MessageBox.Show("Registro Agregado");
                     }
                     else
                     {
-                        MessageBox.Show("Droga repetida");
+                        MessageBox.Show("Localidad repetida");
                     }
                 }
                 catch (Exception exception)
@@ -119,9 +120,9 @@ namespace Farmacia.Windows.Formularios
             if (dgvDatos.SelectedRows.Count > 0)
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
-                Droga droga = (Droga)r.Tag;
+                Localidad localidad = (Localidad)r.Tag;
 
-                DialogResult dr = MessageBox.Show(this, $"¿Desea dar de baja la droga {droga.NombreDroga}?",
+                DialogResult dr = MessageBox.Show(this, $"¿Desea dar de baja la localidad {localidad.NombreLocalidad}?",
                     "Confirmar Baja",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
@@ -129,7 +130,7 @@ namespace Farmacia.Windows.Formularios
                 {
                     try
                     {
-                        _servicio.Borrar(droga.DrogaId);
+                        _servicio.Borrar(localidad.LocalidadId);
                         dgvDatos.Rows.Remove(r);
                         MessageBox.Show("Registro borrado");
                     }
@@ -148,25 +149,25 @@ namespace Farmacia.Windows.Formularios
             if (dgvDatos.SelectedRows.Count > 0)
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
-                Droga droga = (Droga)r.Tag;
-                frmDrogasAE frm = new frmDrogasAE();
-                frm.Text = "Editar Droga";
-                frm.SetDroga(droga);
+                Localidad localidad = (Localidad)r.Tag;
+                frmLocalidadesAE frm = new frmLocalidadesAE();
+                frm.Text = "Editar Localidad";
+                frm.SetLocalidad(localidad);
                 DialogResult dr = frm.ShowDialog(this);
                 if (dr == DialogResult.OK)
                 {
                     try
                     {
-                        droga = frm.GetDroga();
-                        if (!_servicio.Existe(droga))
+                        localidad = frm.GetLocalidad();
+                        if (!_servicio.Existe(localidad))
                         {
-                            _servicio.Guardar(droga);
-                            SetearFila(r, droga);
+                            _servicio.Guardar(localidad);
+                            SetearFila(r, localidad);
                             MessageBox.Show("Registro Editado");
                         }
                         else
                         {
-                            MessageBox.Show("Droga Repetida");
+                            MessageBox.Show("Localidad Repetida");
                         }
                     }
                     catch (Exception exception)

@@ -42,8 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServicioDroga.cs" />
+    <Compile Include="Servicios\ServicioDroga.cs" />
     <Compile Include="Servicios\ServicioFormaFarmaceutica.cs" />
+    <Compile Include="Servicios\ServicioLaboratorio.cs" />
+    <Compile Include="Servicios\ServicioLocalidad.cs" />
+    <Compile Include="Servicios\ServicioObraSocial.cs" />
+    <Compile Include="Servicios\ServicioProvincia.cs" />
+    <Compile Include="Servicios\ServicioTipoDeDocumento.cs" />
+    <Compile Include="Servicios\ServicioTipoDeIngrediente.cs" />
     <Compile Include="Servicios\ServicioTipoDeMedicamento.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -86,7 +86,7 @@ namespace Farmacia.Windows.Formularios
         private void tslAgregar_Click(object sender, EventArgs e)
         {
             frmTiposDeMedicamentosAE frm = new frmTiposDeMedicamentosAE(this);
-            frm.Text = "Nueva TipoDeMedicamento";
+            frm.Text = "Nuevo Tipo de medicamento";
             DialogResult dr = frm.ShowDialog(this);
             if (dr == DialogResult.OK)
             {
@@ -103,7 +103,7 @@ namespace Farmacia.Windows.Formularios
                     }
                     else
                     {
-                        MessageBox.Show("TipoDeMedicamento repetida");
+                        MessageBox.Show("Tipo de medicamento repetido");
                     }
                 }
                 catch (Exception exception)
