@@ -77,5 +77,29 @@ namespace Farmacia.Windows
             frmLocalidades frm = new frmLocalidades();
             frm.ShowDialog(this);
         }
+
+        private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmClientes frm = new frmClientes();
+            frm.ShowDialog(this);
+        }
+
+        private void proveedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmProveedores frm = new frmProveedores();
+            frm.ShowDialog(this);
+        }
+
+        private void medicamentosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmMedicamentos frm = new frmMedicamentos();
+            frm.ShowDialog(this);
+        }
+
+        private void lotesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLotes frm = new frmLotes();
+            frm.ShowDialog(this);
+        }
     }
 }

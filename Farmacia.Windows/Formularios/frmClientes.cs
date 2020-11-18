@@ -13,24 +13,24 @@ using System.Windows.Forms;
 
 namespace Farmacia.Windows.Formularios
 {
-    public partial class frmTiposDeIngredientes : Form
+    public partial class frmClientes : Form
     {
-        public frmTiposDeIngredientes()
+        public frmClientes()
         {
             InitializeComponent();
         }
 
 
-        private List<TipoDeIngrediente> lista;
-        private ServicioTipoDeIngrediente _servicio;
+        private List<Cliente> lista;
+        private ServicioCliente _servicio;
 
         private void MostrarEnGrilla()
         {
             dgvDatos.Rows.Clear();
-            foreach (var tipoDeIngrediente in lista)
+            foreach (var cliente in lista)
             {
                 DataGridViewRow r = ConstruirFila();
-                SetearFila(r, tipoDeIngrediente);
+                SetearFila(r, cliente);
                 AñadirFila(r);
             }
         }
@@ -42,11 +42,20 @@ namespace Farmacia.Windows.Formularios
             dgvDatos.Rows.Add(r);
         }
 
-        private void SetearFila(DataGridViewRow r, TipoDeIngrediente tipoDeIngrediente)
+        private void SetearFila(DataGridViewRow r, Cliente cliente)
         {
-            r.Cells[clmTipoDeIngredientes.Index].Value = tipoDeIngrediente.TipoDeIngredientes;
+            r.Cells[clmNombre.Index].Value = cliente.Nombre;
+            r.Cells[clmApellido.Index].Value = cliente.Apellido;
+            r.Cells[clmTipoDeDocumento.Index].Value = cliente.TipoDeDocumento.Descripcion;
+            r.Cells[clmNroDocumento.Index].Value = cliente.NroDocumento;
+            r.Cells[clmDireccion.Index].Value = cliente.Direccion;
+            r.Cells[clmLocalidad.Index].Value = cliente.Localidad.NombreLocalidad;
+            r.Cells[clmProvincia.Index].Value = cliente.Provincia.NombreProvincia;
+            r.Cells[clmTelefonoFijo.Index].Value = cliente.TelefonoFijo;
+            r.Cells[clmTelefonoMovil.Index].Value = cliente.TelefonoMovil;
+            r.Cells[clmCorreoElectronico.Index].Value = cliente.CorreoElectronico;
 
-            r.Tag = tipoDeIngrediente;
+            r.Tag = cliente;
         }
 
         private DataGridViewRow ConstruirFila()
@@ -56,10 +65,10 @@ namespace Farmacia.Windows.Formularios
             return r;
         }
 
-        public void AgregarFila(TipoDeIngrediente tipoDeIngrediente)
+        public void AgregarFila(Cliente cliente)
         {
             DataGridViewRow r = ConstruirFila();
-            SetearFila(r, tipoDeIngrediente);
+            SetearFila(r, cliente);
             AñadirFila(r);
 
         }
@@ -68,11 +77,11 @@ namespace Farmacia.Windows.Formularios
             Close();
         }
 
-        private void FrmTiposDeIngredientes_Load(object sender, System.EventArgs e)
+        private void FrmClientes_Load(object sender, System.EventArgs e)
         {
             try
             {
-                _servicio = new ServicioTipoDeIngrediente();
+                _servicio = new ServicioCliente();
                 lista = _servicio.GetLista();
                 MostrarEnGrilla();
             }
@@ -85,25 +94,25 @@ namespace Farmacia.Windows.Formularios
 
         private void tslAgregar_Click(object sender, EventArgs e)
         {
-            frmTiposDeIngredientesAE frm = new frmTiposDeIngredientesAE(this);
-            frm.Text = "Nuevo TipoDeIngrediente";
+            frmClientesAE frm = new frmClientesAE(this);
+            frm.Text = "Nuevo Cliente";
             DialogResult dr = frm.ShowDialog(this);
             if (dr == DialogResult.OK)
             {
                 try
                 {
-                    TipoDeIngrediente tipoDeIngrediente = frm.GetTipoDeIngrediente();
-                    if (!_servicio.Existe(tipoDeIngrediente))
+                    Cliente cliente = frm.GetCliente();
+                    if (!_servicio.Existe(cliente))
                     {
-                        _servicio.Guardar(tipoDeIngrediente);
+                        _servicio.Guardar(cliente);
                         DataGridViewRow r = ConstruirFila();
-                        SetearFila(r, tipoDeIngrediente);
+                        SetearFila(r, cliente);
                         AñadirFila(r);
                         MessageBox.Show("Registro Agregado");
                     }
                     else
                     {
-                        MessageBox.Show("Tipo de ingrediente repetido");
+                        MessageBox.Show("Cliente repetido");
                     }
                 }
                 catch (Exception exception)
@@ -119,31 +128,24 @@ namespace Farmacia.Windows.Formularios
             if (dgvDatos.SelectedRows.Count > 0)
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
-                TipoDeIngrediente tipoDeIngrediente = (TipoDeIngrediente)r.Tag;
+                Cliente cliente = (Cliente)r.Tag;
 
-                DialogResult dr = MessageBox.Show(this, $"¿Desea dar de baja el tipo de ingrediente {tipoDeIngrediente.TipoDeIngredientes}?",
+                DialogResult dr = MessageBox.Show(this, $"¿Desea dar de baja el cliente {cliente.Nombre}?",
                     "Confirmar Baja",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
-                    if (!_servicio.EstaRelacionado(tipoDeIngrediente))
+                    try
                     {
-                        try
-                        {
-                            _servicio.Borrar(tipoDeIngrediente.TipoDeIngredienteId);
-                            dgvDatos.Rows.Remove(r);
-                            MessageBox.Show("Registro borrado");
-                        }
-                        catch (Exception exception)
-                        {
-                            MessageBox.Show(exception.Message);
-
-                        }
+                        _servicio.Borrar(cliente.ClienteId);
+                        dgvDatos.Rows.Remove(r);
+                        MessageBox.Show("Registro borrado");
                     }
-                    else
+                    catch (Exception exception)
                     {
-                        MessageBox.Show("El registro esta relacionado, no se puede borrar");
+                        MessageBox.Show(exception.Message);
+
                     }
                 }
             }
@@ -155,25 +157,25 @@ namespace Farmacia.Windows.Formularios
             if (dgvDatos.SelectedRows.Count > 0)
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
-                TipoDeIngrediente tipoDeIngrediente = (TipoDeIngrediente)r.Tag;
-                frmTiposDeIngredientesAE frm = new frmTiposDeIngredientesAE();
-                frm.Text = "Editar TipoDeIngrediente";
-                frm.SetTipoDeIngrediente(tipoDeIngrediente);
+                Cliente cliente = (Cliente)r.Tag;
+                frmClientesAE frm = new frmClientesAE();
+                frm.Text = "Editar Cliente";
+                frm.SetCliente(cliente);
                 DialogResult dr = frm.ShowDialog(this);
                 if (dr == DialogResult.OK)
                 {
                     try
                     {
-                        tipoDeIngrediente = frm.GetTipoDeIngrediente();
-                        if (!_servicio.Existe(tipoDeIngrediente))
+                        cliente = frm.GetCliente();
+                        if (!_servicio.Existe(cliente))
                         {
-                            _servicio.Guardar(tipoDeIngrediente);
-                            SetearFila(r, tipoDeIngrediente);
+                            _servicio.Guardar(cliente);
+                            SetearFila(r, cliente);
                             MessageBox.Show("Registro Editado");
                         }
                         else
                         {
-                            MessageBox.Show("Tipo de ingrediente Repetido");
+                            MessageBox.Show("Cliente Repetido");
                         }
                     }
                     catch (Exception exception)
@@ -183,5 +185,6 @@ namespace Farmacia.Windows.Formularios
                 }
             }
         }
+
     }
 }

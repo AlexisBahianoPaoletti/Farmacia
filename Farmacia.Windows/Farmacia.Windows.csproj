@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormulariosAE\frmClientesAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormulariosAE\frmClientesAE.Designer.cs">
+      <DependentUpon>frmClientesAE.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormulariosAE\frmDrogasAE.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,11 +76,29 @@
     <Compile Include="FormulariosAE\frmLocalidadesAE.Designer.cs">
       <DependentUpon>frmLocalidadesAE.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormulariosAE\frmLotesAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormulariosAE\frmLotesAE.Designer.cs">
+      <DependentUpon>frmLotesAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormulariosAE\frmMedicamentosAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormulariosAE\frmMedicamentosAE.Designer.cs">
+      <DependentUpon>frmMedicamentosAE.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormulariosAE\frmObrasSocialesAE.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormulariosAE\frmObrasSocialesAE.Designer.cs">
       <DependentUpon>frmObrasSocialesAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormulariosAE\frmProveedoresAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormulariosAE\frmProveedoresAE.Designer.cs">
+      <DependentUpon>frmProveedoresAE.cs</DependentUpon>
     </Compile>
     <Compile Include="FormulariosAE\frmProvinciasAE.cs">
       <SubType>Form</SubType>
@@ -100,6 +124,12 @@
     <Compile Include="FormulariosAE\frmTiposDeMedicamentosAE.Designer.cs">
       <DependentUpon>frmTiposDeMedicamentosAE.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\frmClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmClientes.Designer.cs">
+      <DependentUpon>frmClientes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\frmDrogas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,11 +154,29 @@
     <Compile Include="Formularios\frmLocalidades.Designer.cs">
       <DependentUpon>frmLocalidades.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\frmLotes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmLotes.Designer.cs">
+      <DependentUpon>frmLotes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmMedicamentos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmMedicamentos.Designer.cs">
+      <DependentUpon>frmMedicamentos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\frmObrasSociales.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formularios\frmObrasSociales.Designer.cs">
       <DependentUpon>frmObrasSociales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmProveedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmProveedores.Designer.cs">
+      <DependentUpon>frmProveedores.cs</DependentUpon>
     </Compile>
     <Compile Include="Formularios\frmProvincias.cs">
       <SubType>Form</SubType>
@@ -163,6 +211,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormulariosAE\frmClientesAE.resx">
+      <DependentUpon>frmClientesAE.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormulariosAE\frmDrogasAE.resx">
       <DependentUpon>frmDrogasAE.cs</DependentUpon>
     </EmbeddedResource>
@@ -175,8 +226,17 @@
     <EmbeddedResource Include="FormulariosAE\frmLocalidadesAE.resx">
       <DependentUpon>frmLocalidadesAE.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormulariosAE\frmLotesAE.resx">
+      <DependentUpon>frmLotesAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormulariosAE\frmMedicamentosAE.resx">
+      <DependentUpon>frmMedicamentosAE.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormulariosAE\frmObrasSocialesAE.resx">
       <DependentUpon>frmObrasSocialesAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormulariosAE\frmProveedoresAE.resx">
+      <DependentUpon>frmProveedoresAE.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormulariosAE\frmProvinciasAE.resx">
       <DependentUpon>frmProvinciasAE.cs</DependentUpon>
@@ -190,6 +250,9 @@
     <EmbeddedResource Include="FormulariosAE\frmTiposDeMedicamentosAE.resx">
       <DependentUpon>frmTiposDeMedicamentosAE.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmClientes.resx">
+      <DependentUpon>frmClientes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmDrogas.resx">
       <DependentUpon>frmDrogas.cs</DependentUpon>
     </EmbeddedResource>
@@ -202,8 +265,17 @@
     <EmbeddedResource Include="Formularios\frmLocalidades.resx">
       <DependentUpon>frmLocalidades.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmLotes.resx">
+      <DependentUpon>frmLotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmMedicamentos.resx">
+      <DependentUpon>frmMedicamentos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmObrasSociales.resx">
       <DependentUpon>frmObrasSociales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmProveedores.resx">
+      <DependentUpon>frmProveedores.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmProvincias.resx">
       <DependentUpon>frmProvincias.cs</DependentUpon>

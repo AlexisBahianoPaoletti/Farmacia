@@ -39,6 +39,7 @@ namespace Farmacia.Servicio.Servicios
         public void Guardar(Localidad localidad)
         {
             _conexion = new ConexionBd();
+            _repositorioProvincias = new RepositorioProvincias(_conexion.AbrirConexion());
             _repositorioLocalidades = new RepositorioLocalidades(_conexion.AbrirConexion());
             _repositorioLocalidades.Guardar(localidad);
             _conexion.CerrarConexion();
@@ -47,6 +48,7 @@ namespace Farmacia.Servicio.Servicios
         public void Borrar(int id)
         {
             _conexion = new ConexionBd();
+            _repositorioProvincias = new RepositorioProvincias(_conexion.AbrirConexion());
             _repositorioLocalidades = new RepositorioLocalidades(_conexion.AbrirConexion());
             _repositorioLocalidades.Borrar(id);
             _conexion.CerrarConexion();

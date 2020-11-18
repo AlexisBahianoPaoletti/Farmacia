@@ -13,24 +13,24 @@ using System.Windows.Forms;
 
 namespace Farmacia.Windows.Formularios
 {
-    public partial class frmTiposDeIngredientes : Form
+    public partial class frmLotes : Form
     {
-        public frmTiposDeIngredientes()
+        public frmLotes()
         {
             InitializeComponent();
         }
 
 
-        private List<TipoDeIngrediente> lista;
-        private ServicioTipoDeIngrediente _servicio;
+        private List<Lote> lista;
+        private ServicioLote _servicio;
 
         private void MostrarEnGrilla()
         {
             dgvDatos.Rows.Clear();
-            foreach (var tipoDeIngrediente in lista)
+            foreach (var lote in lista)
             {
                 DataGridViewRow r = ConstruirFila();
-                SetearFila(r, tipoDeIngrediente);
+                SetearFila(r, lote);
                 AñadirFila(r);
             }
         }
@@ -42,11 +42,16 @@ namespace Farmacia.Windows.Formularios
             dgvDatos.Rows.Add(r);
         }
 
-        private void SetearFila(DataGridViewRow r, TipoDeIngrediente tipoDeIngrediente)
+        private void SetearFila(DataGridViewRow r, Lote lote)
         {
-            r.Cells[clmTipoDeIngredientes.Index].Value = tipoDeIngrediente.TipoDeIngredientes;
+            r.Cells[clmMedicamento.Index].Value = lote.Medicamento.NombreComercial;
+            r.Cells[clmIdentificacion.Index].Value = lote.Identificacion;
+            r.Cells[clmFechaDeIngreso.Index].Value = lote.FechaDeIngreso;
+            r.Cells[clmVencimiento.Index].Value = lote.Vencimiento;
+            r.Cells[clmCantidad.Index].Value = lote.Cantidad;
 
-            r.Tag = tipoDeIngrediente;
+
+            r.Tag = lote;
         }
 
         private DataGridViewRow ConstruirFila()
@@ -56,10 +61,10 @@ namespace Farmacia.Windows.Formularios
             return r;
         }
 
-        public void AgregarFila(TipoDeIngrediente tipoDeIngrediente)
+        public void AgregarFila(Lote lote)
         {
             DataGridViewRow r = ConstruirFila();
-            SetearFila(r, tipoDeIngrediente);
+            SetearFila(r, lote);
             AñadirFila(r);
 
         }
@@ -68,11 +73,11 @@ namespace Farmacia.Windows.Formularios
             Close();
         }
 
-        private void FrmTiposDeIngredientes_Load(object sender, System.EventArgs e)
+        private void FrmLotes_Load(object sender, System.EventArgs e)
         {
             try
             {
-                _servicio = new ServicioTipoDeIngrediente();
+                _servicio = new ServicioLote();
                 lista = _servicio.GetLista();
                 MostrarEnGrilla();
             }
@@ -85,25 +90,25 @@ namespace Farmacia.Windows.Formularios
 
         private void tslAgregar_Click(object sender, EventArgs e)
         {
-            frmTiposDeIngredientesAE frm = new frmTiposDeIngredientesAE(this);
-            frm.Text = "Nuevo TipoDeIngrediente";
+            frmLotesAE frm = new frmLotesAE(this);
+            frm.Text = "Nuevo Lote";
             DialogResult dr = frm.ShowDialog(this);
             if (dr == DialogResult.OK)
             {
                 try
                 {
-                    TipoDeIngrediente tipoDeIngrediente = frm.GetTipoDeIngrediente();
-                    if (!_servicio.Existe(tipoDeIngrediente))
+                    Lote lote = frm.GetLote();
+                    if (!_servicio.Existe(lote))
                     {
-                        _servicio.Guardar(tipoDeIngrediente);
+                        _servicio.Guardar(lote);
                         DataGridViewRow r = ConstruirFila();
-                        SetearFila(r, tipoDeIngrediente);
+                        SetearFila(r, lote);
                         AñadirFila(r);
                         MessageBox.Show("Registro Agregado");
                     }
                     else
                     {
-                        MessageBox.Show("Tipo de ingrediente repetido");
+                        MessageBox.Show("Lote repetido");
                     }
                 }
                 catch (Exception exception)
@@ -119,31 +124,24 @@ namespace Farmacia.Windows.Formularios
             if (dgvDatos.SelectedRows.Count > 0)
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
-                TipoDeIngrediente tipoDeIngrediente = (TipoDeIngrediente)r.Tag;
+                Lote lote = (Lote)r.Tag;
 
-                DialogResult dr = MessageBox.Show(this, $"¿Desea dar de baja el tipo de ingrediente {tipoDeIngrediente.TipoDeIngredientes}?",
+                DialogResult dr = MessageBox.Show(this, $"¿Desea dar de baja el lote {lote.Identificacion}?",
                     "Confirmar Baja",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
-                    if (!_servicio.EstaRelacionado(tipoDeIngrediente))
+                    try
                     {
-                        try
-                        {
-                            _servicio.Borrar(tipoDeIngrediente.TipoDeIngredienteId);
-                            dgvDatos.Rows.Remove(r);
-                            MessageBox.Show("Registro borrado");
-                        }
-                        catch (Exception exception)
-                        {
-                            MessageBox.Show(exception.Message);
-
-                        }
+                        _servicio.Borrar(lote.LoteId);
+                        dgvDatos.Rows.Remove(r);
+                        MessageBox.Show("Registro borrado");
                     }
-                    else
+                    catch (Exception exception)
                     {
-                        MessageBox.Show("El registro esta relacionado, no se puede borrar");
+                        MessageBox.Show(exception.Message);
+
                     }
                 }
             }
@@ -155,25 +153,25 @@ namespace Farmacia.Windows.Formularios
             if (dgvDatos.SelectedRows.Count > 0)
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
-                TipoDeIngrediente tipoDeIngrediente = (TipoDeIngrediente)r.Tag;
-                frmTiposDeIngredientesAE frm = new frmTiposDeIngredientesAE();
-                frm.Text = "Editar TipoDeIngrediente";
-                frm.SetTipoDeIngrediente(tipoDeIngrediente);
+                Lote lote = (Lote)r.Tag;
+                frmLotesAE frm = new frmLotesAE();
+                frm.Text = "Editar Lote";
+                frm.SetLote(lote);
                 DialogResult dr = frm.ShowDialog(this);
                 if (dr == DialogResult.OK)
                 {
                     try
                     {
-                        tipoDeIngrediente = frm.GetTipoDeIngrediente();
-                        if (!_servicio.Existe(tipoDeIngrediente))
+                        lote = frm.GetLote();
+                        if (!_servicio.Existe(lote))
                         {
-                            _servicio.Guardar(tipoDeIngrediente);
-                            SetearFila(r, tipoDeIngrediente);
+                            _servicio.Guardar(lote);
+                            SetearFila(r, lote);
                             MessageBox.Show("Registro Editado");
                         }
                         else
                         {
-                            MessageBox.Show("Tipo de ingrediente Repetido");
+                            MessageBox.Show("Lote Repetido");
                         }
                     }
                     catch (Exception exception)

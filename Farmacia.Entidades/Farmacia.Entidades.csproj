@@ -41,11 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entidades\Cliente.cs" />
     <Compile Include="Entidades\Droga.cs" />
     <Compile Include="Entidades\FormaFarmaceutica.cs" />
     <Compile Include="Entidades\Laboratorio.cs" />
     <Compile Include="Entidades\Localidad.cs" />
+    <Compile Include="Entidades\Lote.cs" />
+    <Compile Include="Entidades\Medicamento.cs" />
     <Compile Include="Entidades\ObraSocial.cs" />
+    <Compile Include="Entidades\Proveedor.cs" />
     <Compile Include="Entidades\Provincia.cs" />
     <Compile Include="Entidades\TipoDeDocumento.cs" />
     <Compile Include="Entidades\TipoDeIngrediente.cs" />

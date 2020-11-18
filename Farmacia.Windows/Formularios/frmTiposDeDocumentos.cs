@@ -127,16 +127,23 @@ namespace Farmacia.Windows.Formularios
                     MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
-                    try
+                    if (!_servicio.EstaRelacionado(tipoDeDocumento))
                     {
-                        _servicio.Borrar(tipoDeDocumento.TipoDeDocumentoId);
-                        dgvDatos.Rows.Remove(r);
-                        MessageBox.Show("Registro borrado");
-                    }
-                    catch (Exception exception)
-                    {
-                        MessageBox.Show(exception.Message);
+                        try
+                        {
+                            _servicio.Borrar(tipoDeDocumento.TipoDeDocumentoId);
+                            dgvDatos.Rows.Remove(r);
+                            MessageBox.Show("Registro borrado");
+                        }
+                        catch (Exception exception)
+                        {
+                            MessageBox.Show(exception.Message);
 
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("El registro esta relacionado, no se puede borrar");
                     }
                 }
             }

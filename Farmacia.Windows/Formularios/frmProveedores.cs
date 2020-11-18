@@ -13,24 +13,24 @@ using System.Windows.Forms;
 
 namespace Farmacia.Windows.Formularios
 {
-    public partial class frmTiposDeIngredientes : Form
+    public partial class frmProveedores : Form
     {
-        public frmTiposDeIngredientes()
+        public frmProveedores()
         {
             InitializeComponent();
         }
 
 
-        private List<TipoDeIngrediente> lista;
-        private ServicioTipoDeIngrediente _servicio;
+        private List<Proveedor> lista;
+        private ServicioProveedor _servicio;
 
         private void MostrarEnGrilla()
         {
             dgvDatos.Rows.Clear();
-            foreach (var tipoDeIngrediente in lista)
+            foreach (var proveedor in lista)
             {
                 DataGridViewRow r = ConstruirFila();
-                SetearFila(r, tipoDeIngrediente);
+                SetearFila(r, proveedor);
                 AñadirFila(r);
             }
         }
@@ -42,11 +42,20 @@ namespace Farmacia.Windows.Formularios
             dgvDatos.Rows.Add(r);
         }
 
-        private void SetearFila(DataGridViewRow r, TipoDeIngrediente tipoDeIngrediente)
+        private void SetearFila(DataGridViewRow r, Proveedor proveedor)
         {
-            r.Cells[clmTipoDeIngredientes.Index].Value = tipoDeIngrediente.TipoDeIngredientes;
+            r.Cells[clmCUIT.Index].Value = proveedor.CUIT;
+            r.Cells[clmRazonSocial.Index].Value = proveedor.RazonSocial;
+            r.Cells[clmPersonaDeContacto.Index].Value = proveedor.PersonaDeContacto;
+            r.Cells[clmDireccion.Index].Value = proveedor.Direccion;
+            r.Cells[clmLocalidad.Index].Value = proveedor.Localidad;
+            r.Cells[clmProvincia.Index].Value = proveedor.Provincia.NombreProvincia;
+            r.Cells[clmTelefonoFijo.Index].Value = proveedor.TelefonoFijo;
+            r.Cells[clmTelefonoMovil.Index].Value = proveedor.TelefonoMovil;
+            r.Cells[clmCorreoElectronico.Index].Value = proveedor.CorreoElectronico;
+            r.Cells[clmTipoDeIngrediente.Index].Value = proveedor.TipoDeIngrediente.TipoDeIngredientes;
 
-            r.Tag = tipoDeIngrediente;
+            r.Tag = proveedor;
         }
 
         private DataGridViewRow ConstruirFila()
@@ -56,10 +65,10 @@ namespace Farmacia.Windows.Formularios
             return r;
         }
 
-        public void AgregarFila(TipoDeIngrediente tipoDeIngrediente)
+        public void AgregarFila(Proveedor proveedor)
         {
             DataGridViewRow r = ConstruirFila();
-            SetearFila(r, tipoDeIngrediente);
+            SetearFila(r, proveedor);
             AñadirFila(r);
 
         }
@@ -68,11 +77,11 @@ namespace Farmacia.Windows.Formularios
             Close();
         }
 
-        private void FrmTiposDeIngredientes_Load(object sender, System.EventArgs e)
+        private void FrmProveedores_Load(object sender, System.EventArgs e)
         {
             try
             {
-                _servicio = new ServicioTipoDeIngrediente();
+                _servicio = new ServicioProveedor();
                 lista = _servicio.GetLista();
                 MostrarEnGrilla();
             }
@@ -85,25 +94,25 @@ namespace Farmacia.Windows.Formularios
 
         private void tslAgregar_Click(object sender, EventArgs e)
         {
-            frmTiposDeIngredientesAE frm = new frmTiposDeIngredientesAE(this);
-            frm.Text = "Nuevo TipoDeIngrediente";
+            frmProveedoresAE frm = new frmProveedoresAE(this);
+            frm.Text = "Nuevo Proveedor";
             DialogResult dr = frm.ShowDialog(this);
             if (dr == DialogResult.OK)
             {
                 try
                 {
-                    TipoDeIngrediente tipoDeIngrediente = frm.GetTipoDeIngrediente();
-                    if (!_servicio.Existe(tipoDeIngrediente))
+                    Proveedor proveedor = frm.GetProveedor();
+                    if (!_servicio.Existe(proveedor))
                     {
-                        _servicio.Guardar(tipoDeIngrediente);
+                        _servicio.Guardar(proveedor);
                         DataGridViewRow r = ConstruirFila();
-                        SetearFila(r, tipoDeIngrediente);
+                        SetearFila(r, proveedor);
                         AñadirFila(r);
                         MessageBox.Show("Registro Agregado");
                     }
                     else
                     {
-                        MessageBox.Show("Tipo de ingrediente repetido");
+                        MessageBox.Show("Proveedor repetido");
                     }
                 }
                 catch (Exception exception)
@@ -119,31 +128,24 @@ namespace Farmacia.Windows.Formularios
             if (dgvDatos.SelectedRows.Count > 0)
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
-                TipoDeIngrediente tipoDeIngrediente = (TipoDeIngrediente)r.Tag;
+                Proveedor proveedor = (Proveedor)r.Tag;
 
-                DialogResult dr = MessageBox.Show(this, $"¿Desea dar de baja el tipo de ingrediente {tipoDeIngrediente.TipoDeIngredientes}?",
+                DialogResult dr = MessageBox.Show(this, $"¿Desea dar de baja el proveedor {proveedor.RazonSocial}, CUIT {proveedor.CUIT}?",
                     "Confirmar Baja",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
-                    if (!_servicio.EstaRelacionado(tipoDeIngrediente))
+                    try
                     {
-                        try
-                        {
-                            _servicio.Borrar(tipoDeIngrediente.TipoDeIngredienteId);
-                            dgvDatos.Rows.Remove(r);
-                            MessageBox.Show("Registro borrado");
-                        }
-                        catch (Exception exception)
-                        {
-                            MessageBox.Show(exception.Message);
-
-                        }
+                        _servicio.Borrar(proveedor.ProveedorId);
+                        dgvDatos.Rows.Remove(r);
+                        MessageBox.Show("Registro borrado");
                     }
-                    else
+                    catch (Exception exception)
                     {
-                        MessageBox.Show("El registro esta relacionado, no se puede borrar");
+                        MessageBox.Show(exception.Message);
+
                     }
                 }
             }
@@ -155,25 +157,25 @@ namespace Farmacia.Windows.Formularios
             if (dgvDatos.SelectedRows.Count > 0)
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
-                TipoDeIngrediente tipoDeIngrediente = (TipoDeIngrediente)r.Tag;
-                frmTiposDeIngredientesAE frm = new frmTiposDeIngredientesAE();
-                frm.Text = "Editar TipoDeIngrediente";
-                frm.SetTipoDeIngrediente(tipoDeIngrediente);
+                Proveedor proveedor = (Proveedor)r.Tag;
+                frmProveedoresAE frm = new frmProveedoresAE();
+                frm.Text = "Editar Proveedor";
+                frm.SetProveedor(proveedor);
                 DialogResult dr = frm.ShowDialog(this);
                 if (dr == DialogResult.OK)
                 {
                     try
                     {
-                        tipoDeIngrediente = frm.GetTipoDeIngrediente();
-                        if (!_servicio.Existe(tipoDeIngrediente))
+                        proveedor = frm.GetProveedor();
+                        if (!_servicio.Existe(proveedor))
                         {
-                            _servicio.Guardar(tipoDeIngrediente);
-                            SetearFila(r, tipoDeIngrediente);
+                            _servicio.Guardar(proveedor);
+                            SetearFila(r, proveedor);
                             MessageBox.Show("Registro Editado");
                         }
                         else
                         {
-                            MessageBox.Show("Tipo de ingrediente Repetido");
+                            MessageBox.Show("Proveedor Repetido");
                         }
                     }
                     catch (Exception exception)

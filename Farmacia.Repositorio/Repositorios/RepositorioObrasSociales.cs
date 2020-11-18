@@ -69,7 +69,7 @@ namespace Farmacia.Repositorio.Repositorios
             {
                 ObraSocialId = reader.GetInt32(0),
                 NombreObraSocial = reader.GetString(1),
-                PorcentajeDeDescuento=reader.GetDouble(2)
+                PorcentajeDeDescuento=(double)reader.GetDecimal(2)
             };
         }
 
