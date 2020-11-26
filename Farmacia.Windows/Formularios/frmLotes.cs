@@ -154,6 +154,7 @@ namespace Farmacia.Windows.Formularios
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
                 Lote lote = (Lote)r.Tag;
+                lote = _servicio.GetLotePorId(lote.LoteId);
                 frmLotesAE frm = new frmLotesAE();
                 frm.Text = "Editar Lote";
                 frm.SetLote(lote);

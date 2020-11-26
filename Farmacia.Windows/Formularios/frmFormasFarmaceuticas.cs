@@ -156,6 +156,7 @@ namespace Farmacia.Windows.Formularios
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
                 FormaFarmaceutica formaFarmaceutica = (FormaFarmaceutica)r.Tag;
+                formaFarmaceutica = _servicio.GetFormaFarmaceuticaPorId(formaFarmaceutica.FormaFarmaceuticaId);
                 frmFormasFarmaceuticasAE frm = new frmFormasFarmaceuticasAE();
                 frm.Text = "Editar FormaFarmaceutica";
                 frm.SetFormaFarmaceutica(formaFarmaceutica);

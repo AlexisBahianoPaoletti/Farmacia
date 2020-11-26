@@ -157,6 +157,7 @@ namespace Farmacia.Windows.Formularios
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
                 Droga droga = (Droga)r.Tag;
+                droga = _servicio.GetDrogaPorId(droga.DrogaId);
                 frmDrogasAE frm = new frmDrogasAE();
                 frm.Text = "Editar Droga";
                 frm.SetDroga(droga);

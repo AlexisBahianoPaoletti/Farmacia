@@ -158,6 +158,7 @@ namespace Farmacia.Windows.Formularios
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
                 Proveedor proveedor = (Proveedor)r.Tag;
+                proveedor = _servicio.GetProveedorPorId(proveedor.ProveedorId);
                 frmProveedoresAE frm = new frmProveedoresAE();
                 frm.Text = "Editar Proveedor";
                 frm.SetProveedor(proveedor);

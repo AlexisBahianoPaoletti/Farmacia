@@ -158,6 +158,7 @@ namespace Farmacia.Windows.Formularios
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
                 Cliente cliente = (Cliente)r.Tag;
+                cliente = _servicio.GetClientePorId(cliente.ClienteId);
                 frmClientesAE frm = new frmClientesAE();
                 frm.Text = "Editar Cliente";
                 frm.SetCliente(cliente);

@@ -156,6 +156,7 @@ namespace Farmacia.Windows.Formularios
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
                 Laboratorio laboratorio = (Laboratorio)r.Tag;
+                laboratorio = _servicio.GetLaboratorioPorId(laboratorio.LaboratorioId);
                 frmLaboratoriosAE frm = new frmLaboratoriosAE();
                 frm.Text = "Editar Laboratorio";
                 frm.SetLaboratorio(laboratorio);

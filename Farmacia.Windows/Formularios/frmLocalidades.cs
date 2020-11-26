@@ -157,6 +157,7 @@ namespace Farmacia.Windows.Formularios
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
                 Localidad localidad = (Localidad)r.Tag;
+                localidad = _servicio.GetLocalidadPorId(localidad.LocalidadId);
                 frmLocalidadesAE frm = new frmLocalidadesAE();
                 frm.Text = "Editar Localidad";
                 frm.SetLocalidad(localidad);

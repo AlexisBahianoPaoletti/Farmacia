@@ -150,6 +150,7 @@ namespace Farmacia.Windows.Formularios
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
                 ObraSocial obraSocial = (ObraSocial)r.Tag;
+                obraSocial = _servicio.GetObraSocialPorId(obraSocial.ObraSocialId);
                 frmObrasSocialesAE frm = new frmObrasSocialesAE();
                 frm.Text = "Editar Obra social";
                 frm.SetObraSocial(obraSocial);

@@ -156,6 +156,7 @@ namespace Farmacia.Windows.Formularios
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
                 TipoDeDocumento tipoDeDocumento = (TipoDeDocumento)r.Tag;
+                tipoDeDocumento = _servicio.GetTipoDeDocumentoPorId(tipoDeDocumento.TipoDeDocumentoId);
                 frmTiposDeDocumentosAE frm = new frmTiposDeDocumentosAE();
                 frm.Text = "Editar TipoDeDocumento";
                 frm.SetTipoDeDocumento(tipoDeDocumento);

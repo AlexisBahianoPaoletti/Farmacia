@@ -156,6 +156,7 @@ namespace Farmacia.Windows.Formularios
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
                 TipoDeMedicamento tipoDeMedicamento = (TipoDeMedicamento)r.Tag;
+                tipoDeMedicamento = _servicio.GetTipoDeMedicamentoPorId(tipoDeMedicamento.TipoDeMedicamentoId);
                 frmTiposDeMedicamentosAE frm = new frmTiposDeMedicamentosAE();
                 frm.Text = "Editar TipoDeMedicamento";
                 frm.SetTipoDeMedicamento(tipoDeMedicamento);

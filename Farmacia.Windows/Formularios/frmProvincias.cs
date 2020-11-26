@@ -156,6 +156,7 @@ namespace Farmacia.Windows.Formularios
             {
                 DataGridViewRow r = dgvDatos.SelectedRows[0];
                 Provincia provincia = (Provincia)r.Tag;
+                provincia = _servicio.GetProvinciaPorId(provincia.ProvinciaId);
                 frmProvinciasAE frm = new frmProvinciasAE();
                 frm.Text = "Editar Provincia";
                 frm.SetProvincia(provincia);
