@@ -56,6 +56,7 @@ namespace Farmacia.Windows.FormulariosAE
                 chbSuspendido.Checked = medicamento.Suspendido;
 
                 _esEdicion = true;
+                txtUnidadesEnStok.Enabled = false;
             }
 
 

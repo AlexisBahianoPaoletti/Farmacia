@@ -130,6 +130,12 @@
     <Compile Include="Formularios\frmClientes.Designer.cs">
       <DependentUpon>frmClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\frmCompras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmCompras.Designer.cs">
+      <DependentUpon>frmCompras.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\frmDrogas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +208,12 @@
     <Compile Include="Formularios\frmTiposDeMedicamentos.Designer.cs">
       <DependentUpon>frmTiposDeMedicamentos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\frmVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmVentas.Designer.cs">
+      <DependentUpon>frmVentas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Helper.cs" />
     <Compile Include="MenuPrincipal.cs">
       <SubType>Form</SubType>
@@ -253,6 +265,9 @@
     <EmbeddedResource Include="Formularios\frmClientes.resx">
       <DependentUpon>frmClientes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmCompras.resx">
+      <DependentUpon>frmCompras.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmDrogas.resx">
       <DependentUpon>frmDrogas.cs</DependentUpon>
     </EmbeddedResource>
@@ -289,6 +304,9 @@
     <EmbeddedResource Include="Formularios\frmTiposDeMedicamentos.resx">
       <DependentUpon>frmTiposDeMedicamentos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmVentas.resx">
+      <DependentUpon>frmVentas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
     </EmbeddedResource>
@@ -300,6 +318,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -323,6 +342,9 @@
       <Project>{3E0DD99F-D938-4BFE-8817-979FDE2B794E}</Project>
       <Name>Farmacia.Servicio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_window_40px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

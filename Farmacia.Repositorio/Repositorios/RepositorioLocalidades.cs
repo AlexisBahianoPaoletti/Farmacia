@@ -12,6 +12,7 @@ namespace Farmacia.Repositorio.Repositorios
     {
         private readonly SqlConnection _connection;
         private readonly RepositorioProvincias _repositorioProvincias;
+        private SqlTransaction sqlTransaction;
 
         public RepositorioLocalidades(SqlConnection connection, RepositorioProvincias repositorioProvincias)
         {
@@ -24,6 +25,12 @@ namespace Farmacia.Repositorio.Repositorios
             _connection = connection;
         }
 
+        public RepositorioLocalidades(SqlConnection _connection, RepositorioProvincias repositorioProvincias, SqlTransaction sqlTransaction)
+        {
+            this._connection = _connection;
+            this._repositorioProvincias = repositorioProvincias;
+            this.sqlTransaction = sqlTransaction;
+        }
 
         public Localidad GetLocalidadPorId(int id)
         {
@@ -32,7 +39,7 @@ namespace Farmacia.Repositorio.Repositorios
             {
                 string cadenaComando =
                     "SELECT LocalidadId, NombreLocalidad, ProvinciaId FROM Localidades WHERE LocalidadId=@id";
-                SqlCommand comando = new SqlCommand(cadenaComando, _connection);
+                SqlCommand comando = new SqlCommand(cadenaComando, _connection, sqlTransaction);
                 comando.Parameters.AddWithValue("@id", id);
                 SqlDataReader reader = comando.ExecuteReader();
                 if (reader.HasRows)

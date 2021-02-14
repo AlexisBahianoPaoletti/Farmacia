@@ -15,6 +15,7 @@ namespace Farmacia.Repositorio.Repositorios
         private readonly RepositorioTiposDeMedicamentos _repositorioTiposDeMedicamentos;
         private readonly RepositorioFormasFarmaceuticas _repositorioFormasFarmaceuticas;
         private readonly RepositorioLaboratorios _repositorioLaboratorios;
+        private SqlTransaction transaction;
 
         public RepositorioMedicamentos(SqlConnection connection, RepositorioDrogas repositorioDrogas,
                 RepositorioTiposDeMedicamentos repositorioTiposDeMedicamentos, RepositorioFormasFarmaceuticas repositorioFormasFarmaceuticas, 
@@ -32,6 +33,28 @@ namespace Farmacia.Repositorio.Repositorios
             _connection = connection;
         }
 
+        public RepositorioMedicamentos(SqlConnection _connection, SqlTransaction transaction)
+        {
+            this._connection = _connection;
+            this.transaction = transaction;
+        }
+
+        public void ModificarStok(int cantidad, int id)
+        {
+            try
+            {
+                var cadenaComando = "Update Medicamentos set UnidadesEnStok += @cantidad where MedicamentoId = @id";
+                SqlCommand comando = new SqlCommand(cadenaComando, _connection, transaction);
+                comando.Parameters.AddWithValue("@cantidad", cantidad);
+                comando.Parameters.AddWithValue("@id", id);
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
 
         public Medicamento GetMedicamentoPorId(int id)
         {

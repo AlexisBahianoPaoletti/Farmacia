@@ -26,6 +26,20 @@ namespace Farmacia.Windows.Helpers
             cbo.ValueMember = "ProvinciaId";
             cbo.SelectedIndex = 0;
         }
+
+        internal static void CargarComboCliente(ref ComboBox cbm)
+        {
+            ServicioCliente servicioCliente = new ServicioCliente();
+            cbm.DataSource = null;
+            List<Cliente> lista = servicioCliente.GetLista();
+            var defaultCliente = new Cliente { ClienteId = 0, Nombre = "[Seleccione]" };
+            lista.Insert(0, defaultCliente);
+            cbm.DataSource = lista;
+            cbm.DisplayMember = "Nombre";
+            cbm.ValueMember = "ClienteId";
+            cbm.SelectedIndex = 0;
+        }
+
         public static void CargarComboLocalidades(ref ComboBox cbo)
         {
             ServicioLocalidad servicioLocalidad = new ServicioLocalidad();
@@ -122,5 +136,31 @@ namespace Farmacia.Windows.Helpers
             cbo.ValueMember = "MedicamentoId";
             cbo.SelectedIndex = 0;
         }
+
+        public static void CargarComboProveedor(ref ComboBox cbo)
+        {
+            ServicioProveedor servicioProveedor = new ServicioProveedor();
+            cbo.DataSource = null;
+            List<Proveedor> lista = servicioProveedor.GetLista();
+            var defaultProveedor = new Proveedor { ProveedorId = 0, RazonSocial = "[Seleccione]" };
+            lista.Insert(0, defaultProveedor);
+            cbo.DataSource = lista;
+            cbo.DisplayMember = "RazonSocial";
+            cbo.ValueMember = "ProveedorId";
+            cbo.SelectedIndex = 0;
+        }
+        public static void CargarComboObraSocial(ref ComboBox cbo)
+        {
+            ServicioObraSocial servicioObraSocial = new ServicioObraSocial();
+            cbo.DataSource = null;
+            List<ObraSocial> lista = servicioObraSocial.GetLista();
+            var defaultObraSocial = new ObraSocial { ObraSocialId = 0, NombreObraSocial = "[Seleccione]" };
+            lista.Insert(0, defaultObraSocial);
+            cbo.DataSource = lista;
+            cbo.DisplayMember = "NombreObraSocial";
+            cbo.ValueMember = "ObraSocialId";
+            cbo.SelectedIndex = 0;
+        }
+
     }
 }

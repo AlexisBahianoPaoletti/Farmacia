@@ -11,18 +11,26 @@ namespace Farmacia.Repositorio.Repositorios
     public class RepositorioObrasSociales
     {
         private readonly SqlConnection _sqlConnection;
+        private SqlTransaction sqlTransaction;
 
         public RepositorioObrasSociales(SqlConnection sqlConnection)
         {
             _sqlConnection = sqlConnection;
         }
+
+        public RepositorioObrasSociales(SqlConnection cn, SqlTransaction sqlTransaction)
+        {
+            this._sqlConnection = cn;
+            this.sqlTransaction = sqlTransaction;
+        }
+
         public ObraSocial GetObraSocialPorId(int id)
         {
             try
             {
                 ObraSocial obraSocial = null;
                 string cadenaComando = "SELECT ObraSocialId, NombreObraSocial, PorcentajeDeDescuento FROM ObrasSociales WHERE ObraSocialId=@id";
-                SqlCommand comando = new SqlCommand(cadenaComando, _sqlConnection);
+                SqlCommand comando = new SqlCommand(cadenaComando, _sqlConnection, sqlTransaction);
                 comando.Parameters.AddWithValue("@id", id);
                 SqlDataReader reader = comando.ExecuteReader();
                 if (reader.HasRows)

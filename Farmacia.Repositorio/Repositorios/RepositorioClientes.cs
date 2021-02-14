@@ -14,6 +14,7 @@ namespace Farmacia.Repositorio.Repositorios
         private readonly RepositorioTiposDeDocumentos _repositorioTiposDeDocumentos;
         private readonly RepositorioLocalidades _repositorioLocalidades;
         private readonly RepositorioProvincias _repositorioProvincias;
+        private SqlTransaction sqlTransaction;
 
         public RepositorioClientes(SqlConnection connection, RepositorioTiposDeDocumentos repositorioTiposDeDocumentos,
                 RepositorioLocalidades repositorioLocalidades, RepositorioProvincias repositorioProvincias)
@@ -29,6 +30,20 @@ namespace Farmacia.Repositorio.Repositorios
             _connection = connection;
         }
 
+        public RepositorioClientes(SqlConnection _connection, SqlTransaction sqlTransaction)
+        {
+            this._connection = _connection;
+            this.sqlTransaction = sqlTransaction;
+        }
+
+        public RepositorioClientes(SqlConnection _connection, RepositorioTiposDeDocumentos repositorioTiposDeDocumentos, RepositorioLocalidades repositorioLocalidades, RepositorioProvincias repositorioProvincias, SqlTransaction sqlTransaction1)
+        {
+            this._connection = _connection;
+            this._repositorioTiposDeDocumentos = repositorioTiposDeDocumentos;
+            this._repositorioLocalidades = repositorioLocalidades;
+            this._repositorioProvincias = repositorioProvincias;
+            this.sqlTransaction = sqlTransaction1;
+        }
 
         public Cliente GetClientePorId(int id)
         {
@@ -38,7 +53,7 @@ namespace Farmacia.Repositorio.Repositorios
                 string cadenaComando =
                     "SELECT ClienteId, Nombre, Apellido, TipoDeDocumentoId, NroDocumento, Direccion, LocalidadId, " +
                     "ProvinciaId, TelefonoFijo, TelefonoMovil, CorreoElectronico FROM Clientes WHERE ClienteId=@id";
-                SqlCommand comando = new SqlCommand(cadenaComando, _connection);
+                SqlCommand comando = new SqlCommand(cadenaComando, _connection, sqlTransaction);
                 comando.Parameters.AddWithValue("@id", id);
                 SqlDataReader reader = comando.ExecuteReader();
                 if (reader.HasRows)
@@ -67,7 +82,7 @@ namespace Farmacia.Repositorio.Repositorios
                 string cadenaComando =
                     "SELECT ClienteId, Nombre, Apellido, TipoDeDocumentoId, NroDocumento, Direccion, LocalidadId, " +
                     "ProvinciaId, TelefonoFijo, TelefonoMovil, CorreoElectronico FROM Clientes";
-                SqlCommand comando = new SqlCommand(cadenaComando, _connection);
+                SqlCommand comando = new SqlCommand(cadenaComando, _connection, sqlTransaction);
                 SqlDataReader reader = comando.ExecuteReader();
                 while (reader.Read())
                 {
@@ -114,7 +129,7 @@ namespace Farmacia.Repositorio.Repositorios
                     string cadenaComando = "INSERT INTO Clientes (Nombre, Apellido, TipoDeDocumentoId, NroDocumento, Direccion, LocalidadId, " +
                     "ProvinciaId, TelefonoFijo, TelefonoMovil, CorreoElectronico) VALUES (@nombre, @apellido, @tipoDocumento, @nroDocumento, " +
                     "@direccion, @localidad, @provincia, @telefonoFijo, @telefonoMovil, @correoElectronico)";
-                    var comando = new SqlCommand(cadenaComando, _connection);
+                    var comando = new SqlCommand(cadenaComando, _connection, sqlTransaction);
 
                     comando.Parameters.AddWithValue("@nombre", cliente.Nombre);
                     comando.Parameters.AddWithValue("@apellido", cliente.Apellido);
@@ -129,7 +144,7 @@ namespace Farmacia.Repositorio.Repositorios
 
                     comando.ExecuteNonQuery();
                     cadenaComando = "SELECT @@IDENTITY";
-                    comando = new SqlCommand(cadenaComando, _connection);
+                    comando = new SqlCommand(cadenaComando, _connection, sqlTransaction);
                     int id = (int)(decimal)comando.ExecuteScalar();
                     cliente.ClienteId = id;
 
@@ -148,7 +163,7 @@ namespace Farmacia.Repositorio.Repositorios
                     var cadenaDeComando = "UPDATE Clientes SET Nombre=@nombre, Apellido=@apellido, TipoDeDocumentoId=@tipoDocumento, " +
                         "NroDocumento=@nroDocumento, Direccion=@direccion, LocalidadId=@localidad, ProvinciaId=@provincia," +
                         "TelefonoFijo=@telefonoFijo, TelefonoMovil=@telefonoMovil, CorreoElectronico=@correoElectronico WHERE ClienteId=@id";
-                    var comando = new SqlCommand(cadenaDeComando, _connection);
+                    var comando = new SqlCommand(cadenaDeComando, _connection, sqlTransaction);
 
                     comando.Parameters.AddWithValue("@nombre", cliente.Nombre);
                     comando.Parameters.AddWithValue("@apellido", cliente.Apellido);

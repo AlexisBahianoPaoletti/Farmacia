@@ -11,18 +11,26 @@ namespace Farmacia.Repositorio.Repositorios
     public class RepositorioTiposDeDocumentos
     {
         private readonly SqlConnection _sqlConnection;
+        private SqlTransaction sqlTransaction;
 
         public RepositorioTiposDeDocumentos(SqlConnection sqlConnection)
         {
             _sqlConnection = sqlConnection;
         }
+
+        public RepositorioTiposDeDocumentos(SqlConnection _sqlConnection, SqlTransaction sqlTransaction)
+        {
+            this._sqlConnection = _sqlConnection;
+            this.sqlTransaction = sqlTransaction;
+        }
+
         public TipoDeDocumento GetTipoDeDocumentoPorId(int id)
         {
             try
             {
                 TipoDeDocumento tipoDeDocumento = null;
                 string cadenaComando = "SELECT TipoDeDocumentoId, Descripcion FROM TiposDeDocumentos WHERE TipoDeDocumentoId=@id";
-                SqlCommand comando = new SqlCommand(cadenaComando, _sqlConnection);
+                SqlCommand comando = new SqlCommand(cadenaComando, _sqlConnection, sqlTransaction);
                 comando.Parameters.AddWithValue("@id", id);
                 SqlDataReader reader = comando.ExecuteReader();
                 if (reader.HasRows)

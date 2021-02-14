@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entidades\Cliente.cs" />
+    <Compile Include="Entidades\ClientesObrasSociales.cs" />
+    <Compile Include="Entidades\Compra.cs" />
+    <Compile Include="Entidades\ComprasMedicamentos.cs" />
     <Compile Include="Entidades\Droga.cs" />
     <Compile Include="Entidades\FormaFarmaceutica.cs" />
     <Compile Include="Entidades\Laboratorio.cs" />
@@ -53,6 +56,8 @@
     <Compile Include="Entidades\Provincia.cs" />
     <Compile Include="Entidades\TipoDeDocumento.cs" />
     <Compile Include="Entidades\TipoDeIngrediente.cs" />
+    <Compile Include="Entidades\Venta.cs" />
+    <Compile Include="Entidades\VentasMedicamentos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entidades\TipoDeMedicamento.cs" />
   </ItemGroup>

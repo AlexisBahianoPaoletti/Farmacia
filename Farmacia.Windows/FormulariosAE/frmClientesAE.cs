@@ -41,6 +41,9 @@ namespace Farmacia.Windows.FormulariosAE
             Helper.CargarComboTiposDeDocumentos(ref cmbTipoDeDocumento);
             Helper.CargarComboLocalidades(ref cmbLocalidad);
             Helper.CargarComboProvincias(ref cmbProvincia);
+            Helper.CargarComboObraSocial(ref cmbObraSocial1);
+            Helper.CargarComboObraSocial(ref cmbObraSocial2);
+            Helper.CargarComboObraSocial(ref cmbObraSocial3);
             if (cliente != null)
             {
                 txtNombre.Text = cliente.Nombre;
@@ -53,6 +56,27 @@ namespace Farmacia.Windows.FormulariosAE
                 cmbTipoDeDocumento.SelectedValue = cliente.TipoDeDocumento.TipoDeDocumentoId;
                 cmbLocalidad.SelectedValue = cliente.Localidad.LocalidadId;
                 cmbProvincia.SelectedValue = cliente.Provincia.ProvinciaId;
+                if (_servicio.VerificarObraSocial(cliente))
+                {
+                    int cantidadObraSocial = cliente.ClientesObrasSociales.Count();
+                    if (cantidadObraSocial==1)
+                    {
+                        cmbObraSocial1.SelectedValue = cliente.ClientesObrasSociales[0].obraSocial.ObraSocialId;
+                    }
+                    else if (cantidadObraSocial==2)
+                    {
+                        cmbObraSocial1.SelectedValue = cliente.ClientesObrasSociales[0].obraSocial.ObraSocialId;
+                        cmbObraSocial2.SelectedValue = cliente.ClientesObrasSociales[1].obraSocial.ObraSocialId;
+
+                    }
+                    else
+                    {
+                        cmbObraSocial1.SelectedValue = cliente.ClientesObrasSociales[0].obraSocial.ObraSocialId;
+                        cmbObraSocial2.SelectedValue = cliente.ClientesObrasSociales[1].obraSocial.ObraSocialId;
+                        cmbObraSocial3.SelectedValue = cliente.ClientesObrasSociales[2].obraSocial.ObraSocialId;
+
+                    }
+                }
                 _esEdicion = true;
             }
 
@@ -117,7 +141,13 @@ namespace Farmacia.Windows.FormulariosAE
                 valido = false;
                 errorProvider1.SetError(cmbProvincia, "Debe seleccionar una provincia");
             }
-
+            if ((cmbObraSocial1.SelectedIndex!=0 && cmbObraSocial2.SelectedIndex!=0) &&(cmbObraSocial1.SelectedIndex == cmbObraSocial2.SelectedIndex) ||
+                (cmbObraSocial1.SelectedIndex != 0 && cmbObraSocial3.SelectedIndex != 0) && (cmbObraSocial1.SelectedIndex == cmbObraSocial3.SelectedIndex) ||
+                (cmbObraSocial2.SelectedIndex != 0 && cmbObraSocial3.SelectedIndex != 0) && cmbObraSocial2.SelectedIndex == cmbObraSocial3.SelectedIndex)
+            {
+                valido = false;
+                errorProvider1.SetError(cmbObraSocial1, "La obra social no se puede repetir en ningún caso");
+            }
             return valido;
         }
 
@@ -143,8 +173,27 @@ namespace Farmacia.Windows.FormulariosAE
                 cliente.TipoDeDocumento = (TipoDeDocumento)cmbTipoDeDocumento.SelectedItem;
                 cliente.Localidad = (Localidad)cmbLocalidad.SelectedItem;
                 cliente.Provincia = (Provincia)cmbProvincia.SelectedItem;
-
-
+                if (cmbObraSocial1.SelectedIndex!=0)
+                {
+                    ClientesObrasSociales clientesObrasSociales = new ClientesObrasSociales();
+                    clientesObrasSociales.cliente = cliente;
+                    clientesObrasSociales.obraSocial = (ObraSocial)cmbObraSocial1.SelectedItem;
+                    cliente.ClientesObrasSociales.Add(clientesObrasSociales);
+                }
+                if (cmbObraSocial2.SelectedIndex != 0)
+                {
+                    ClientesObrasSociales clientesObrasSociales = new ClientesObrasSociales();
+                    clientesObrasSociales.cliente = cliente;
+                    clientesObrasSociales.obraSocial = (ObraSocial)cmbObraSocial2.SelectedItem;
+                    cliente.ClientesObrasSociales.Add(clientesObrasSociales);
+                }
+                if (cmbObraSocial3.SelectedIndex != 0)
+                {
+                    ClientesObrasSociales clientesObrasSociales = new ClientesObrasSociales();
+                    clientesObrasSociales.cliente = cliente;
+                    clientesObrasSociales.obraSocial = (ObraSocial)cmbObraSocial3.SelectedItem;
+                    cliente.ClientesObrasSociales.Add(clientesObrasSociales);
+                }
                 if (ValidarObjeto())
                 {
 
@@ -215,6 +264,9 @@ namespace Farmacia.Windows.FormulariosAE
             return valido;
         }
 
+        private void frmClientesAE_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }

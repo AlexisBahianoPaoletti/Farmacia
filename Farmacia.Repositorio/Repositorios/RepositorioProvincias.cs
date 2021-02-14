@@ -11,11 +11,19 @@ namespace Farmacia.Repositorio.Repositorios
     public class RepositorioProvincias
     {
         private readonly SqlConnection _sqlConnection;
+        private SqlTransaction sqlTransaction;
 
         public RepositorioProvincias(SqlConnection sqlConnection)
         {
             _sqlConnection = sqlConnection;
         }
+
+        public RepositorioProvincias(SqlConnection _sqlConnection, SqlTransaction sqlTransaction)
+        {
+            this._sqlConnection = _sqlConnection;
+            this.sqlTransaction = sqlTransaction;
+        }
+
         public Provincia GetProvinciaPorId(int id)
         {
             try
@@ -23,7 +31,7 @@ namespace Farmacia.Repositorio.Repositorios
                 Provincia provincia = null;
 
                 string cadenaComando = "SELECT ProvinciaId, NombreProvincia FROM Provincias WHERE ProvinciaId=@id";
-                SqlCommand comando = new SqlCommand(cadenaComando, _sqlConnection);
+                SqlCommand comando = new SqlCommand(cadenaComando, _sqlConnection, sqlTransaction);
                 comando.Parameters.AddWithValue("@id", id);
                 SqlDataReader reader = comando.ExecuteReader();
                 if (reader.HasRows)

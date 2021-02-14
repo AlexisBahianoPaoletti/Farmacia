@@ -19,6 +19,7 @@ namespace Farmacia.Entidades.Entidades
         public string TelefonoFijo { get; set; }
         public string TelefonoMovil { get; set; }
         public string CorreoElectronico { get; set; }
+        public List<ClientesObrasSociales> ClientesObrasSociales { get; set; } = new List<ClientesObrasSociales>();
 
     }
 }

@@ -43,6 +43,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\ServicioCliente.cs" />
+    <Compile Include="Servicios\ServicioClienteObraSocial.cs" />
+    <Compile Include="Servicios\ServicioCompra.cs" />
+    <Compile Include="Servicios\ServicioCompraMedicamento.cs" />
     <Compile Include="Servicios\ServicioDroga.cs" />
     <Compile Include="Servicios\ServicioFormaFarmaceutica.cs" />
     <Compile Include="Servicios\ServicioLaboratorio.cs" />
@@ -55,6 +58,8 @@
     <Compile Include="Servicios\ServicioTipoDeDocumento.cs" />
     <Compile Include="Servicios\ServicioTipoDeIngrediente.cs" />
     <Compile Include="Servicios\ServicioTipoDeMedicamento.cs" />
+    <Compile Include="Servicios\ServicioVenta.cs" />
+    <Compile Include="Servicios\ServicioVentaMedicamento.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Farmacia.Entidades\Farmacia.Entidades.csproj">

@@ -101,5 +101,24 @@ namespace Farmacia.Windows
             frmLotes frm = new frmLotes();
             frm.ShowDialog(this);
         }
+
+        private void archivosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comprasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCompras frm = new frmCompras();
+            frm.Text = "Compras";
+            frm.ShowDialog(this);
+        }
+
+        private void ventasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmVentas frm = new frmVentas();
+            frm.Text="Ventas";
+            frm.ShowDialog(this);
+        }
     }
 }
