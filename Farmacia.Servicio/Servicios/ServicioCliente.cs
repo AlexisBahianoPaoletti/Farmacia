@@ -87,10 +87,20 @@ namespace Farmacia.Servicio.Servicios
                 sqlTransaction = cn.BeginTransaction();
                 _repositorioClientes = new RepositorioClientes(cn, sqlTransaction);
                 _repositorioClientesObrasSociales = new RepositorioClientesObrasSociales(cn, sqlTransaction);
+                bool edicion = false;
+                if (cliente.ClienteId!=null)
+                {
+                    edicion = true;
+
+                }
+                else
+                {
+                    edicion = false;
+                }
                 _repositorioClientes.Guardar(cliente);
                 foreach (var co in cliente.ClientesObrasSociales)
                 {
-                    _repositorioClientesObrasSociales.Guardar(co);
+                    _repositorioClientesObrasSociales.Guardar(co, edicion);
                 }
                 sqlTransaction.Commit();
                 _conexion.CerrarConexion();

@@ -246,6 +246,9 @@ namespace Farmacia.Windows.FormulariosAE
             cmbTipoDeDocumento.SelectedIndex = 0;
             cmbLocalidad.SelectedIndex = 0;
             cmbProvincia.SelectedIndex = 0;
+            cmbObraSocial1.SelectedIndex = 0;
+            cmbObraSocial2.SelectedIndex = 0;
+            cmbObraSocial3.SelectedIndex = 0;
             txtNombre.Focus();
             cliente = null;
 

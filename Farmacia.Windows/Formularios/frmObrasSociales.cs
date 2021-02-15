@@ -45,7 +45,7 @@ namespace Farmacia.Windows.Formularios
         private void SetearFila(DataGridViewRow r, ObraSocial obraSocial)
         {
             r.Cells[clmObraSocial.Index].Value = obraSocial.NombreObraSocial;
-            r.Cells[clmPorcentajeDeDescuento.Index].Value = obraSocial.PorcentajeDeDescuento;
+            r.Cells[clmPorcentajeDeDescuento.Index].Value = obraSocial.PorcentajeDeDescuento + "%";
 
             r.Tag = obraSocial;
         }

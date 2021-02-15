@@ -48,7 +48,7 @@ namespace Farmacia.Windows.Formularios
             r.Cells[clmRazonSocial.Index].Value = proveedor.RazonSocial;
             r.Cells[clmPersonaDeContacto.Index].Value = proveedor.PersonaDeContacto;
             r.Cells[clmDireccion.Index].Value = proveedor.Direccion;
-            r.Cells[clmLocalidad.Index].Value = proveedor.Localidad;
+            r.Cells[clmLocalidad.Index].Value = proveedor.Localidad.NombreLocalidad;
             r.Cells[clmProvincia.Index].Value = proveedor.Provincia.NombreProvincia;
             r.Cells[clmTelefonoFijo.Index].Value = proveedor.TelefonoFijo;
             r.Cells[clmTelefonoMovil.Index].Value = proveedor.TelefonoMovil;

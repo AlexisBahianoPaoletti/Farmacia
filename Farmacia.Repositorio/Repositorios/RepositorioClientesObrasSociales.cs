@@ -51,15 +51,26 @@ namespace Farmacia.Repositorio.Repositorios
             }
         }
 
-        public void Guardar(ClientesObrasSociales co)
+        public void Guardar(ClientesObrasSociales co, bool edicion)
         {
             try
             {
-                var cadenaComando = "Insert into ClientesObrasSociales (ClienteId, ObraSocialId) Values (@cliente, @obraSocial)";
-                SqlCommand comando = new SqlCommand(cadenaComando, sqlConnection, sqlTransaction);
-                comando.Parameters.AddWithValue("@cliente", co.cliente.ClienteId);
-                comando.Parameters.AddWithValue("@obraSocial", co.obraSocial.ObraSocialId);
-                comando.ExecuteNonQuery();
+                if (!edicion)
+                {
+                    var cadenaComando = "Insert into ClientesObrasSociales (ClienteId, ObraSocialId) Values (@cliente, @obraSocial)";
+                    SqlCommand comando = new SqlCommand(cadenaComando, sqlConnection, sqlTransaction);
+                    comando.Parameters.AddWithValue("@cliente", co.cliente.ClienteId);
+                    comando.Parameters.AddWithValue("@obraSocial", co.obraSocial.ObraSocialId);
+                    comando.ExecuteNonQuery();
+                }
+                else
+                {
+                    var cadenaComando = "Update ClientesObrasSociales set ObraSocialId = @obraSocial Where ClienteId = @cliente";
+                    SqlCommand comando = new SqlCommand(cadenaComando, sqlConnection, sqlTransaction);
+                    comando.Parameters.AddWithValue("@cliente", co.cliente.ClienteId);
+                    comando.Parameters.AddWithValue("@obraSocial", co.obraSocial.ObraSocialId);
+                    comando.ExecuteNonQuery();
+                }
             }
             catch (Exception ex)
             {

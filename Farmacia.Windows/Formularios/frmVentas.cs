@@ -132,6 +132,20 @@ namespace Farmacia.Windows.Formularios
                 verdadero = false;
                 errorProvider1.SetError(cbmMedicamento, "Medicamento suspendido");
             }
+            int stok = 0;
+            foreach (var cm in lista)
+            {
+                stok += cm.Cantidad;
+
+            }
+            stok += Cantidad;
+
+            if (medicamento.UnidadesEnStok<stok)
+            {
+                verdadero = false;
+                errorProvider1.SetError(txtCantidad, "Ingrese una cifra menor a vender... No contamos con tanto Stok");
+            }
+            
             return verdadero;
         }
 
@@ -156,13 +170,14 @@ namespace Farmacia.Windows.Formularios
             }
         }
         private ServicioCliente servicioCliente = new ServicioCliente();
+        double total = 0;
+
         private void ActualizarTotal()
         {
             try
             {
                 double subtotal = 0;
                 double descuento = 0;
-                double total = 0;
                 foreach (var cm in lista)
                 {
                     subtotal += cm.Precio;
@@ -201,7 +216,10 @@ namespace Farmacia.Windows.Formularios
                 venta.ventasMedicamentos = lista;
                 venta.Fecha = DateTime.Now;
                 venta.Cliente = (Cliente)cbmCliente.SelectedItem;
+                venta.PrecioTotal = total;
+
                 servicioVenta.Guardar(venta);
+
 
                 MessageBox.Show("Venta realizada con éxito", "Vendido", MessageBoxButtons.OK);
                 Close();
